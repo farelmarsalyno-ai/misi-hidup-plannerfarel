@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Misi Hidup Farel</title>
+<link rel="stylesheet" href="style.css">
+<base target="_blank">
+</head>
+<body>
+
+<header class="topbar">
+  <div>
+    <h1>🎯 MISI HIDUP FAREL</h1>
+    <p class="subtitle" id="tanggalHariIni"></p>
+  </div>
+  <div class="header-actions">
+    <button class="btn btn-ghost" onclick="exportData()">⬇ Export</button>
+    <button class="btn btn-ghost" onclick="document.getElementById('importFile').click()">⬆ Import</button>
+    <input type="file" id="importFile" accept=".json" hidden onchange="importData(event)">
+  </div>
+</header>
+
+<!-- ===== DRIVE BESAR ===== -->
+<section class="section">
+  <h2 class="section-title">🚩 Drive Besar</h2>
+  <div class="drives" id="driveCards"></div>
+</section>
+
+<!-- ===== TABEL 1: RENCANA HARIAN (study_items) ===== -->
+<section class="section">
+  <div class="section-head">
+    <h2 class="section-title">📋 Rencana Harian <span class="tag">study_items</span></h2>
+    <div class="filters">
+      <button class="chip active" data-filter="hari" onclick="setFilter('hari', this)">Hari ini</button>
+      <button class="chip" data-filter="minggu" onclick="setFilter('minggu', this)">7 hari</button>
+      <button class="chip" data-filter="semua" onclick="setFilter('semua', this)">Semua</button>
+    </div>
+  </div>
+
+  <div class="sheet-wrapper">
+    <table class="sheet" id="studyTable">
+      <thead>
+        <tr>
+          <th class="col-check">✔</th>
+          <th class="col-date">Tanggal</th>
+          <th class="col-time">Mulai</th>
+          <th class="col-time">Selesai</th>
+          <th class="col-drive">Drive</th>
+          <th class="col-bidang">Bidang</th>
+          <th class="col-kegiatan">Kegiatan / Materi</th>
+          <th class="col-jenis">Jenis</th>
+          <th class="col-del"></th>
+        </tr>
+      </thead>
+      <tbody id="studyBody"></tbody>
+    </table>
+    <button class="btn btn-add" onclick="addStudy()">＋ Tambah baris</button>
+  </div>
+
+  <div class="summary">
+    <div class="summary-box">
+      <span class="summary-label">⏱ Total jam belajar hari ini</span>
+      <span class="summary-value" id="totalJam">0 jam 0 mnt</span>
+    </div>
+    <div class="summary-box">
+      <span class="summary-label">✅ Sesi selesai hari ini</span>
+      <span class="summary-value" id="doneCount">0 / 0</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TABEL 2: TUGAS / PR KULIAH (weekly_assignments) ===== -->
+<section class="section">
+  <h2 class="section-title">🎓 Tugas / PR Kuliah <span class="tag">weekly_assignments</span></h2>
+  <div class="sheet-wrapper">
+    <table class="sheet" id="assignTable">
+      <thead>
+        <tr>
+          <th class="col-check">✔</th>
+          <th class="col-matkul">Mata Kuliah</th>
+          <th class="col-kegiatan">Tugas / PR</th>
+          <th class="col-jenis">Jenis</th>
+          <th class="col-date">Deadline</th>
+          <th class="col-sisa">Sisa</th>
+          <th class="col-del"></th>
+        </tr>
+      </thead>
+      <tbody id="assignBody"></tbody>
+    </table>
+    <button class="btn btn-add" onclick="addAssign()">＋ Tambah baris</button>
+  </div>
+
+  <div class="summary">
+    <div class="summary-box">
+      <span class="summary-label">📚 Tugas aktif</span>
+      <span class="summary-value" id="assignOpen" style="color:var(--orange)">0</span>
+    </div>
+    <div class="summary-box">
+      <span class="summary-label">⚠️ Deadline ≤ 2 hari</span>
+      <span class="summary-value" id="assignUrgent" style="color:var(--red)">0</span>
+    </div>
+  </div>
+</section>
+
+<p class="footer-note">💾 Data tersimpan otomatis di browser ini • <b>Enter</b>/<b>↓</b> pindah ke bawah, <b>Shift+Tab</b> ke sel sebelumnya, klik sel langsung ngetik — tanpa tombol simpan.</p>
+
+<script src="app.js"></script>
+</body>
+  </html>
